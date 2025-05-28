@@ -1,0 +1,25 @@
+# ArgoCD application pointing to my version tagged release of the reflector chart
+# Will show on my argocd applications page
+# Reflector application
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reflector
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dom-lc/poc-release-please.git
+    targetRevision: reflector-v1.0.0
+    path: charts/reflector
+    helm: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: reflector
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
