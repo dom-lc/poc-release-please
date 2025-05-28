@@ -1,0 +1,25 @@
+# ArgoCD application pointing to my version tagged release of the reflector chart
+# Will show on my argocd applications page
+# Reflector application
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dom-lc/poc-release-please.git
+    targetRevision: ingress-nginx-v0.3.0
+    path: charts/ingress-nginx
+    helm: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ingress-nginx
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
