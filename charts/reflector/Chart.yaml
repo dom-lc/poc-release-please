@@ -5,5 +5,5 @@ appVersion: 1.0.0
 description: This chart deploys the emberstack reflector
 dependencies:
   - name: reflector
-    version: 7.1.288
+    version: 9.1.1
     repository: https://emberstack.github.io/helm-charts
